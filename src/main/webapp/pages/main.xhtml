@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 
+    Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head></h:head>
+    <h:body>
+        <h:form id="form">  
+            <p:growl id="growl" showDetail="true"/>  
+            <p:dataTable id="birthdays" var="menBirthday" value="#{mainBean.getMenBirthdaydataModel()}" paginator="true" selection="#{mainBean.selectedMenBirthday}" selectionMode="single">  
+                <p:ajax event="rowSelect" update=":form:display, :form:growl" oncomplete ="birthdayEdit.show()" />
+                <p:column headerText="Фаимилия">  
+                    #{menBirthday.lastname}  
+
+                </p:column>  
+
+                <p:column headerText="Дата рождения">  
+                    #{menBirthday.birthday}
+                </p:column>  
+
+
+            </p:dataTable>  
+            <p:dialog id="dialog" header="Редактирование дня родждения" widgetVar="birthdayEdit" resizable="false"  
+                      showEffect="fade">  
+
+                <h:panelGrid id="display" columns="2" cellpadding="4">  
+
+                    <h:outputText value="Фаимилия:" />  
+                    <h:outputText   value="#{mainBean.selectedMenBirthday.lastname}" />  
+
+                    <h:outputText value="Дата рождения:" />  
+                    <h:outputText value="#{mainBean.selectedMenBirthday.birthday}" />  
+                </h:panelGrid>  
+            </p:dialog> 
+        </h:form>  
+    </h:body>
+</html>

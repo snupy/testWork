@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14.09.2013 1:49:50 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="ru.malik.testproject.entity.DAO.SecondName" schema="MASTER" table="TABLE2">
+    <id name="if_" type="int">
+      <column name="IF"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="lastname" type="string">
+      <column length="50" name="LASTNAME" not-null="true" unique="true"/>
+    </property>
+  </class>
+</hibernate-mapping>
