@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 import ru.malik.testproject.entity.DAO.MenBirthday;
 import ru.malik.testproject.entity.DAO.MenBirthdayDAO;
+import ru.malik.testproject.entity.DAO.SecondName;
+import ru.malik.testproject.entity.DAO.SecondNameDAO;
 
 /**
  *
@@ -29,7 +31,7 @@ public class MainBean {
 
     public MainBean() {
 
-        this.menBirthdayList = (new MenBirthdayDAO()).getAllMenBirthdays();
+        this.menBirthdayList = (new MenBirthdayDAO()).findAll();
 
         this.menBirthdaydataModel = new MenBirthdaydataModel(this.menBirthdayList);
     }
@@ -54,6 +56,12 @@ public class MainBean {
         return menBirthdaydataModel;
     }
     
-    
+    public List<SecondName> completeSecondName(String query) {
+        List<SecondName> list = (new SecondNameDAO()).findAll();
+        for (SecondName secondName : list) {
+            System.out.println(secondName);
+        }
+        return list;
+    }
     
 }

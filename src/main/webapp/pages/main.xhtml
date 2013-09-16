@@ -27,7 +27,7 @@
                 <h:panelGrid id="display" columns="2" cellpadding="4">  
 
                     <h:outputText value="Фаимилия:" />  
-                    <h:outputText   value="#{mainBean.selectedMenBirthday.lastname}" />  
+                    <p:autoComplete   value="#{mainBean.selectedMenBirthday.lastname}" id ="lastname" completeMethod="#{mainBean.completeSecondName}" var ="pSecondName" itemLabel="#{pSecondName.getLastname()}" itemValue="#{pSecondName}" forceSelection="true"/>  
 
                     <h:outputText value="Дата рождения:" />  
                     <h:outputText value="#{mainBean.selectedMenBirthday.birthday}" />  

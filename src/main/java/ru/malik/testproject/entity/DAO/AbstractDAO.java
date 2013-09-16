@@ -6,94 +6,91 @@ package ru.malik.testproject.entity.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import ru.malik.testproject.entity.HibernateUtil;
 
 /**
  *
  * @author Малик
  */
-public class MenBirthdayDAO extends AbstractDAO<MenBirthday>{
+public abstract class AbstractDAO<T> {
+    private Class<T> entityClass;
 
-    private Session session = null;
+    public abstract Session getSession();
 
-    @Override
-    public Session getSession() {
-        return session;
+    public Class<T> getEntityClass(){
+        return entityClass;
+    }
+
+    public AbstractDAO(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
     
-    
-    public MenBirthdayDAO() {
-        super(MenBirthday.class);
-        session = HibernateUtil.getSessionFactory().openSession();
-        //session.setFlushMode(FlushMode.MANUAL);
-    }
 
-    /*public void add(MenBirthday menBirthday) {
+    public List<T> findAll() {
+        List<T> list = new ArrayList<T>();
         Transaction tr = null;
         try {
             tr = getSession().beginTransaction();
-            getSession().save(menBirthday);
+            list = getSession().createCriteria(getEntityClass()).list();
             tr.commit();
         } catch (Exception e) {
             tr.rollback();
             e.printStackTrace();
-        }
-    }
 
-    public List<MenBirthday> findAll() {
-        List<MenBirthday> list = new ArrayList<MenBirthday>();
-        Transaction tr = null;
-        try {
-            tr = getSession().beginTransaction();
-            list = getSession().createCriteria(MenBirthday.class).list();
-            tr.commit();
-        } catch (Exception e) {
-            tr.rollback();
-            e.printStackTrace();
         }
         return list;
     }
 
-    public void update(MenBirthday menBirthday) {
+    public void add(T entity) {
         Transaction tr = null;
         try {
             tr = getSession().beginTransaction();
-            getSession().update(menBirthday);
+            getSession().save(entity);
             tr.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             tr.rollback();
+            e.printStackTrace();
         }
     }
 
-    public MenBirthday getById(Integer id) {
+    public void update(T entity) {
         Transaction tr = null;
-        MenBirthday menBirthday = null;
-        
         try {
             tr = getSession().beginTransaction();
-            menBirthday = (MenBirthday) session.load(MenBirthday.class, id);
+            getSession().update(entity);
             tr.commit();
         } catch (Exception e) {
             tr.rollback();
             e.printStackTrace();
         }
-        return menBirthday;
     }
-    
-    public void delete(MenBirthday menBirthday) {
+
+    public void delete(T entity) {
         Transaction tr = null;
         try {
             tr = getSession().beginTransaction();
-            getSession().delete(menBirthday);
+            getSession().delete(entity);
             tr.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             tr.rollback();
+            e.printStackTrace();
         }
-    }*/
+    }
+
+    public T getById(Integer id) {
+        T result = null;
+        Transaction tr = null;
+        try {
+            tr = getSession().beginTransaction();
+            result = (T)getSession().load(getEntityClass(), id);
+            tr.commit();
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 }

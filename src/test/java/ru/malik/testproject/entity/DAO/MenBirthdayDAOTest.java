@@ -52,24 +52,24 @@ public class MenBirthdayDAOTest {
 
     
     /**
-     * Test of getAllMenBirthdays method, of class MenBirthdayDAO.
+     * Test of findAll method, of class MenBirthdayDAO.
      */
     @Test
     public void testGetAllMenBirthdays() {
         System.out.println("getAllMenBirthdays");
-        List result = instance.getAllMenBirthdays();
+        List result = instance.findAll();
         assertTrue(result.size() != 0);
 
     }
 
     /**
-     * Test of updateMenBirthday method, of class MenBirthdayDAO.
+     * Test of update method, of class MenBirthdayDAO.
      */
     @Test
     public void testUpdateMenBirthday() {
         System.out.println("updateMenBirthday");
         MenBirthday menBirthday = TEST_MENBIRTHDAY;
-        instance.updateMenBirthday(menBirthday);
+        instance.update(menBirthday);
 
     }
 
@@ -77,19 +77,19 @@ public class MenBirthdayDAOTest {
     public void testGetMenBirthdayById() {
         System.out.println("getMenBirthdayById");
         MenBirthday menBirthday = TEST_MENBIRTHDAY;
-        instance.addMenBirthday(TEST_MENBIRTHDAY);
-        MenBirthday getedMenBirthday = instance.getMenBirthdayById(Integer.valueOf(menBirthday.getId()));
+        instance.add(TEST_MENBIRTHDAY);
+        MenBirthday getedMenBirthday = instance.getById(Integer.valueOf(menBirthday.getId()));
         assertNotNull(getedMenBirthday);
-        instance.deleteMenBirthday(getedMenBirthday);
+        instance.delete(getedMenBirthday);
     }
     
     /**
-     * Test of addMenBirthday method, of class MenBirthdayDAO.
+     * Test of add method, of class MenBirthdayDAO.
      */
     @Test
     public void testAddMenBirthday() {
         System.out.println("addMenBirthday");
         
-        instance.addMenBirthday(TEST_MENBIRTHDAY);
+        instance.add(TEST_MENBIRTHDAY);
     }
 }
